@@ -49,6 +49,7 @@ class Classifier:
 
 	 # train the Classifier by manipulating the loss and bias
 	def train(self):
+		lr = 0.5
 
 		for i in range(60000):
 			# print(i)
@@ -61,9 +62,8 @@ class Classifier:
 				y = 1
 			loss = seLoss(a, y)
 			# print(loss)
-			lr = 0.5
-			self.weight = self.weight - lr * gradient_w(a, y, aPrime, x_i)
-			self.b = self.b - lr * gradient_b(a, y, aPrime)
+			self.weight -= lr * gradient_w(a, y, aPrime, x_i)
+			self.b -= lr * gradient_b(a, y, aPrime)
 
 	# predict a test value
 	def predict(self, x_i):
@@ -106,7 +106,7 @@ counter = 0
 
 # loop through all 10,000 test images
 for p in range(10000):
-	print("this is the expected  value: " + str(y_test[p]))
+	# print("this is the expected  value: " + str(y_test[p]))
 	prediction.append(class_0.predict(x_test[p]))
 	prediction.append(class_1.predict(x_test[p]))
 	prediction.append(class_2.predict(x_test[p]))
@@ -117,8 +117,8 @@ for p in range(10000):
 	prediction.append(class_7.predict(x_test[p]))
 	prediction.append(class_8.predict(x_test[p]))
 	prediction.append(class_9.predict(x_test[p]))
-	print("this is the predicted value: " + str(np.argmax(prediction)))
-	print()
+	# print("this is the predicted value: " + str(np.argmax(prediction)))
+	# print()
 	predictVal = np.argmax(prediction)
 	prediction.clear()
 	if(predictVal == y_test[p]):
