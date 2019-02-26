@@ -26,7 +26,7 @@ def gradient_b(a, y):
 	return a - y
 
 # seed the random number generator
-np.random.seed(42)
+np.random.seed()
 
 # load mnist data
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -60,8 +60,8 @@ class Classifier:
 				y = 1
 			loss = bceLoss(a, y)
 			lr = 0.5
-			self.weight = self.weight - lr * gradient_w(a, y, x_i)
-			self.b = self.b - lr * gradient_b(a, y)
+			self.weight -= lr * gradient_w(a, y, x_i)
+			self.b -= lr * gradient_b(a, y)
 
 	# predict a test value
 	def predict(self, x_i):
@@ -103,7 +103,7 @@ counter = 0
 
 # loop through all 10,000 test images
 for p in range(10000):
-	print("this is the expected  value: " + str(y_test[p]))
+	# print("this is the expected  value: " + str(y_test[p]))
 	prediction.append(class_0.predict(x_test[p]))
 	prediction.append(class_1.predict(x_test[p]))
 	prediction.append(class_2.predict(x_test[p]))
@@ -114,8 +114,8 @@ for p in range(10000):
 	prediction.append(class_7.predict(x_test[p]))
 	prediction.append(class_8.predict(x_test[p]))
 	prediction.append(class_9.predict(x_test[p]))
-	print("this is the predicted value: " + str(np.argmax(prediction)))
-	print()
+	# print("this is the predicted value: " + str(np.argmax(prediction)))
+	# print()
 	predictVal = np.argmax(prediction)
 	prediction.clear()
 	if(predictVal == y_test[p]):
