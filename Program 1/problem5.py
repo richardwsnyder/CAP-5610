@@ -55,7 +55,7 @@ def dfs(x, i, j):
 
 	# index of current pixel in the visited and 
 	# parents array
-	px = (i * rows) + j
+	px = (i * 28) + j
 
 	# you're at the pixel, so set it's visited 
 	# boolean to true
@@ -77,18 +77,18 @@ def dfs(x, i, j):
 		new_y = i + dy[n]
 
 		# get the next pixel that you're moving to
-		nx = (i * rows) + j + (cols * dy[n]) + dx[n]
+		nx = (i * 28) + j + (28 * dy[n]) + dx[n]
 
 		# if the new pixel is in bounds and it's black, 
 		# set the parents cell to -1, go onto next iteration
 		# of the loop
-		if 0 <= new_y < rows and 0 <= new_x < cols:
+		if 0 <= new_y < 28 and 0 <= new_x < 28:
 			if x[new_y][new_x] == 1:
 				parents[nx] = -1
 
 		# else, if you haven't visited the pixel and it's a white 
 		# pixel, find it's parent, and recursively call dfs on that
-		if 0 <= new_y < rows and 0 <= new_x < cols:
+		if 0 <= new_y < 28 and 0 <= new_x < 28:
 			if x[new_y][new_x] == 0 and visited[nx] == 0:
 				parents[nx] = find(px)
 				dfs(x, new_y, new_x)
@@ -97,7 +97,7 @@ def dfs(x, i, j):
 def djset(x):
 	for i in range(28):
 		for j in range(28):
-			px = (i * rows) + j
+			px = (i * 28) + j
 			if visited[px] == 0:
 				dfs(x, i, j)
 
@@ -106,7 +106,7 @@ def djset(x):
 # append the calculated regions value to the image's 
 # input vector
 def add_features(train, test):
-	for q in range(image_count):
+	for q in range(60000):
 		np.append(train[q], djset(x_train_[q]))
 
 	for q in range(10000):
