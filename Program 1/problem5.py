@@ -9,9 +9,6 @@ import random
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.utils import to_categorical
 
-# load mnist data
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-
 # initialize visited array to show that no
 # pixel has been visited
 visited = [0] * 784
