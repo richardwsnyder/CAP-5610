@@ -19,12 +19,12 @@ model.add(tf.keras.layers.Flatten())
 model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
 
 # initialize the model to use categorical crossentropy as its loss function
-model.compile(optimizer = 'adam',
+model.compile(optimizer = 'sgd',
 			  loss = 'sparse_categorical_crossentropy',
 			  metrics = ['accuracy'])
 
 # fit the model to the training data
-model.fit(x_train, y_train, epochs=3)
+model.fit(x_train, y_train, epochs=10)
 
 # evaluate the model based on the test data
 val_los, val_acc = model.evaluate(x_test, y_test)
