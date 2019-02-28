@@ -50,14 +50,16 @@ class Classifier:
 	def train(self, epochs):
 
 		for epoch in range(epochs):
+			s = np.random.permutation(60000)
+			x_shuffled = x_train[s]
+			y_shuffled = y_train[s]
 			for i in range(60000):
-				# print(i)
-				x_i = x_train[i]
+				x_i = x_shuffled[i]
 				z = calculateZ(self.weight, x_i, self.b)
 				a = sigma(z)
 				aPrime = sigmaPrime(z)
 				y = 0
-				if self.number == y_train[i]:
+				if self.number == y_shuffled[i]:
 					y = 1
 				loss = bceLoss(a, y)
 				lr = 0.5
