@@ -47,22 +47,23 @@ class Classifier:
 		self.b = 0
 
 	# train the Classifier by manipulating the loss and bias
-	def train(self):
+	def train(self, epochs):
 
-		for i in range(60000):
-			# print(i)
-			x_i = x_train[i]
-			z = calculateZ(self.weight, x_i, self.b)
-			a = sigma(z)
-			aPrime = sigmaPrime(z)
-			y = 0
-			if self.number == y_train[i]:
-				y = 1
-			loss = bceLoss(a, y)
-			lr = 0.5
-			self.weight -= lr * gradient_w(a, y, x_i)
-			self.b -= lr * gradient_b(a, y)
-
+		for epoch in range(epochs):
+			for i in range(60000):
+				# print(i)
+				x_i = x_train[i]
+				z = calculateZ(self.weight, x_i, self.b)
+				a = sigma(z)
+				aPrime = sigmaPrime(z)
+				y = 0
+				if self.number == y_train[i]:
+					y = 1
+				loss = bceLoss(a, y)
+				lr = 0.5
+				self.weight -= lr * gradient_w(a, y, x_i)
+				self.b -= lr * gradient_b(a, y)
+			print("finished epoch {} for classifier {}".format(epoch, self.number))
 	# predict a test value
 	def predict(self, x_i):
 		z = calculateZ(self.weight, x_i, self.b)
@@ -81,16 +82,16 @@ class_8 = Classifier(8)
 class_9 = Classifier(9)
 
 # train each Classifier
-class_0.train()
-class_1.train()
-class_2.train()
-class_3.train()
-class_4.train()
-class_5.train()
-class_6.train()
-class_7.train()
-class_8.train()
-class_9.train()
+class_0.train(3)
+class_1.train(3)
+class_2.train(3)
+class_3.train(3)
+class_4.train(3)
+class_5.train(3)
+class_6.train(3)
+class_7.train(3)
+class_8.train(3)
+class_9.train(3)
 
 # prediction is used for each individual test image
 prediction = []
